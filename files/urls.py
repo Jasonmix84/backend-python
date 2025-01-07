@@ -20,5 +20,6 @@ from files import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index)
+    path('', views.index, name='index'),
+    path('counter', views.counter, name="counter")
 ]
