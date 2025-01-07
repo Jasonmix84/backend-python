@@ -93,13 +93,19 @@
 
     <!-- Hero Section -->
     <section id="hero" class="hero section">
-
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
             <h2><span>I'm </span><span class="underlight">Jenny Wilson</span> a Professional<span> Photographer from New York City</span></h2>
-            <p>Blanditiis praesentium aliquam illum tempore incidunt debitis dolorem magni est deserunt sed qui libero. Qui voluptas amet.</p>
-            <a href="contact.html" class="btn-get-started">Available for Hire<br></a>
+            {% for feature in features %}
+            <p>{{feature.details}}</p>
+            {% if feature.is_true %}
+            <p>This feature is True</p>
+            {% else %}
+            <p>This feature is False</p>
+            {% endif %}
+            <a href="contact.html" class="btn-get-started">{{feature.name}}<br></a>
+            {% endfor %}
           </div>
         </div>
       </div>
