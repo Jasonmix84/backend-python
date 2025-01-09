@@ -99,11 +99,6 @@
             <h2><span>I'm </span><span class="underlight">Jenny Wilson</span> a Professional<span> Photographer from New York City</span></h2>
             {% for feature in features %}
             <p>{{feature.details}}</p>
-            {% if feature.is_true %}
-            <p>This feature is True</p>
-            {% else %}
-            <p>This feature is False</p>
-            {% endif %}
             <a href="contact.html" class="btn-get-started">{{feature.name}}<br></a>
             {% endfor %}
           </div>
