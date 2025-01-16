@@ -34,19 +34,28 @@ def register(request):
         return render(request, 'register.html')
 
 def login(request):
-    if request.method == "Post":
+    if request.method == "POST":
         username = request.POST['username']
         password = request.POST['password']
 
-        if User.objects.filter(username=username).exists():
-            #now i want to get that user that exists and check that the passwords match
-            pass
+        user = auth.authenticate(username=username, password=password)
+
+        if user is not None:
+            auth.login(request, user)
+            return redirect('/') 
         else:
-            pass
+            messages.info(request, 'Username or Password is incorrect') 
+            return redirect('login')
     else:
         return render(request, 'login.html')
+    
+def logout(request):
+    auth.logout(request)
+    return redirect('/')
 
 def counter(request):
-    text = request.POST['text']
-    amount_of_words = len(text.split())
-    return render(request, 'counter.html', {'amount': amount_of_words})
+    posts = [1, 2, 3, 4, 5, 'tim', 'tom', 'john']
+    return render(request, 'counter.html', {'posts': posts})
+
+def post(request, pk):
+    return render(request, 'post.html', {'pk' : pk})

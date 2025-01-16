@@ -74,7 +74,14 @@
             </ul>
           </li>
           <li><a href="services.html">Services</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          {% if user.is_authenticated %}
+          logout
+          <li><a href="logout">
+          {% else %}
+          login or signup
+          <li><a href="login"></a>
+          {% endif %}
+          </a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -96,7 +103,15 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6 text-center" data-aos="fade-up" data-aos-delay="100">
-            <h2><span>I'm </span><span class="underlight">Jenny Wilson</span> a Professional<span> Photographer from New York City</span></h2>
+            <h2><span>I'm </span>
+              <span class="underlight">
+                {% if user.is_authenticated %}
+                {{user.username}}
+                {% else %}
+                a nobody
+                {% endif %}
+              </span> 
+              a Professional<span> Photographer from New York City</span></h2>
             {% for feature in features %}
             <p>{{feature.details}}</p>
             <a href="contact.html" class="btn-get-started">{{feature.name}}<br></a>
